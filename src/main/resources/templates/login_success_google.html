@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng nhập bằng Google</title>
+</head>
+<body>
+    <h1>Chào mừng bạn <th:block th:text="${userResponse.getName()}"></th:block></h1>
+    <h1 th:text="'ID: ' + ${userResponse.getId()}"/>
+    <h1 th:text="'Email: ' + ${userResponse.getEmail()}"/>
+    <h1 th:text="'Tên đệm và tên: ' + ${userResponse.getFamilyName()}"/>
+    <h1 th:text="'Họ: ' + ${userResponse.getLastName()}"/>
+    <h1 th:text="'Bạn đến từ: ' + ${userResponse.getLocale()}"/>
+    <img th:src="${userResponse.getImageUrl()}">
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Thoát">
+    </form>
+</body>
+</html>
