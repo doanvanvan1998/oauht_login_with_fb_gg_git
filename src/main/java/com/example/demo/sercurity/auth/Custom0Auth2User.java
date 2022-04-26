@@ -1,5 +1,6 @@
 package com.example.demo.sercurity.auth;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
@@ -7,11 +8,14 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.Map;
 
+@Data
 public class Custom0Auth2User implements OAuth2User {
     private OAuth2User oAuth2User;
+    private String token;
 
-    public Custom0Auth2User(OAuth2User oAuth2User,String methodLogin){
+    public Custom0Auth2User(OAuth2User oAuth2User,String token){
         this.oAuth2User = oAuth2User;
+        this.token =token;
     }
 
     @Override
@@ -39,16 +43,11 @@ public class Custom0Auth2User implements OAuth2User {
     }
 
     public String getImageUrl(){
-        if(oAuth2User.getAttributes().containsKey("picture")) {
-            Map<String, Object> pictureObj = (Map<String, Object>) oAuth2User.getAttributes().get("picture");
-            if(pictureObj.containsKey("data")) {
-                Map<String, Object>  dataObj = (Map<String, Object>) pictureObj.get("data");
-                if(dataObj.containsKey("url")) {
-                    return (String) dataObj.get("url");
-                }
-            }
-        }
+
         return null;
+    }
+    public String getId(){
+        return oAuth2User.getAttribute("id");
     }
 
 }

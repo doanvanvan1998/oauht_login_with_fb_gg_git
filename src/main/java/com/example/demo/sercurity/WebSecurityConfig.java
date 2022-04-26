@@ -25,6 +25,7 @@ import javax.persistence.Enumerated;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Configuration
@@ -72,6 +73,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                             auth2User = (Custom0Auth2User) authentication.getPrincipal();
                             email = auth2User.getAttribute("email");
                             provider = ProviderEntity.FACEBOOK;
+                            String token = auth2User.getToken();
+                            HttpSession session = request.getSession();
+                            session.setAttribute("token",token);
+                            session.setAttribute("id",auth2User.getId());
                         }
                         catch (Exception e){
                             oAuth2User= (DefaultOAuth2User) authentication.getPrincipal();
