@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http:/www.thymeleaf.org">
+<head th:replace="fragments :: html_head(pageTitle='Product Manager - Home')" />
+<body>
+<div class="container text-center">
+	<div><h1>Product Manager</h1></div>
+	<h2 th:text="${session.username}"></h2>
+<!--	<h2 th:text="${code}"></h2>-->
+	<div>
+		<img th:src="${session.userimage}" style="width: 100px;height: 100px;">
+		<br/>
+		<h4><a th:href="@{/list}">View all products</a></h4>
+		<br/>
+		<h4><a th:href="@{/new}">Create a New Product</a></h4>
+		<br/>
+	</div>
+</div>
+</body>
+</html>
