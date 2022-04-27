@@ -14,7 +14,7 @@
         <form style="width: 22rem;" method="post" th:action="@{/login}">
             <!-- Username input -->
             <div class="form-outline mb-4">
-                <input type="email" name="email" id="form2Example1" class="form-control" placeholder="Username">
+                <input type="email" name="email" id="form2Example1" class="form-control" placeholder="Email">
                 <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 88.8px;"></div><div class="form-notch-trailing"></div></div></div>
 
             <!-- Password input -->
@@ -34,7 +34,7 @@
 
                 <div class="col">
                     <!-- Simple link -->
-                    <a href="#!">Forgot password?</a>
+                    <a th:href="@{/reset-password}">Forgot password?</a>
                 </div>
             </div>
 

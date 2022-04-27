@@ -30,4 +30,5 @@ public class UserEntity {
 
     @Enumerated(EnumType.STRING)
     private Provider provider;
+    private String token;
 }
