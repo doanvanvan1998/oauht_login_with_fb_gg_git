@@ -1,0 +1,39 @@
+<div th:replace="admin/fragmentsHeader.html"></div>
+<div class="container mt-5">
+    <h1>Cập nhật</h1>
+    <form method="post" th:action="@{/admin/add-update-product}" th:object="${product}" enctype="multipart/form-data">
+        <input class="d-none" type="text" th:value="${product.getId()}" name="id"></input>
+        <div class="form-group">
+            <label >Tên sản phẩm:</label>
+            <input type="text" th:value="${product.getName()}" name="name" class="form-control" >
+        </div>
+        <div class="form-group">
+            <label>Giá sản phẩm:</label>
+            <input type="number" th:value="${product.getPrice()}" name = "price" class="form-control" >
+        </div>
+        <div class="form-group">
+            <label >% sale:</label>
+            <input type="number" th:value="${product.getPercentSale()}" name="percentSale" class="form-control">
+        </div>
+        <div class="form-group">
+            <label >Giá sale:</label>
+            <input type="number" th:value="${product.getPriceSale()}" name="priceSale" class="form-control">
+        </div>
+        <div>
+            <img style="width: 338px; height: 338px" th:src="|@{/uploads/}${product.getImage()}|">
+        </div>
+        <div class="custom-file col-md-2">
+            <input type="file" name="file" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Chọn file ...</label>
+        </div>
+        <div class="form-group">
+            <label >Danh mục sản phẩm:</label>
+            <select id="abc" th:value="${product.getCategoryEntity().getId()}" name="categoryId" class="form-control">
+                <option th:each="item : ${categories}" th:text="${item.getName()}" th:value="${item.getId()}">1</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+    </form>
+</div>
+
+<div th:replace="admin/fragmentsFooter.html"></div>

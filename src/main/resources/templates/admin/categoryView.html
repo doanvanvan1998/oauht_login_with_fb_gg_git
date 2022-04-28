@@ -1,0 +1,59 @@
+<div th:replace="admin/fragmentsHeader.html"></div>
+
+
+<div class="container mt-5">
+    <h3>Danh mục sản phẩm</h3>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Thêm mới
+    </button>
+    <table class="table">
+        <th>
+            <tr>
+                <td>Name</td>
+                <td>Ngày tạo</td>
+                <td>Người tạo</td>
+                <td>Hành động</td>
+            </tr>
+        </th>
+        <tbody>
+        <tr th:each="item : ${Categories}">
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.CreateDate}"></td>
+            <td th:text="${item.CreateBy}"></td>
+            <td>
+                <div class="d-flex">
+                    <form class="mr-2" method="get" th:action="|@{/admin/getCategory/}${item.getId()}|">
+                        <button class="btn btn-warning">Cập nhật</button>
+                    </form>
+                    <form method="get" th:action="|@{/admin/removeCateogry/}${item.getId()}|">
+                        <button class="btn btn-danger">Xóa</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form method="post" class="modal-content" th:action="@{/admin/add-update-category}" th:object="${categoryDto}">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Lưu mới danh mục</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="name">Tên danh mục:</label>
+                    <input type="text" th:field="*{name}" class="form-control" id="name">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div th:replace="admin/fragmentsFooter.html"></div>

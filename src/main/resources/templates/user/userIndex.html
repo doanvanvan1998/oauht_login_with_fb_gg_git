@@ -1,0 +1,59 @@
+<div th:replace="user/fragmentsHeader.html"></div>
+<style>
+    html{
+        font-family: svn-gilroy;
+    }
+    .sale{
+        line-height: 25px;
+        width: 50px;
+        font-size: 11px;
+        padding-left: 8px;
+        position: absolute;
+        background-image: url(http://bizweb.dktcdn.net/100/438/408/themes/857207/assets/sale_tag.svg?1649127770547);
+        z-index: 3;
+        line-height: 32px;
+        width: 67px;
+        color: #fff;
+        font-size: 14px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        top: 40px;
+        left: 16px;
+    }
+    .item-sale{
+        text-decoration: line-through;
+        font-size: 16px;
+        color: #7a7a9d;
+        line-height: 17px;
+        display: inline;
+    }
+</style>
+
+<div class="container mt-5">
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <a th:href="@{/listCart}" class="navbar-brand btn btn-warning">Xem dỏ hàng</a>
+<!--        <form class="form-inline" method="post" th:action="@{/product/find_product_by_search}">-->
+<!--            <input class="form-control mr-sm-2" name="search_text" type="text" placeholder="Tìm kiếm ..." aria-label="Search">-->
+<!--            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>-->
+<!--        </form>-->
+    </nav>
+    <div class="row">
+        <div class="col-md-3 p-3" style="position: relative;" th:each="item : ${lstProductModal}">
+            <img style="width: 100%;height: 80%" th:src="|@{/uploads/}${item.image}|">
+            <div>
+                <span style="font-weight: inherit;" th:text="${item.name}"></span>
+            </div>
+            <div th:if="${item.priceSale != null}">
+                <span style="color: #fcaf17;" th:text="|${item.priceSale}đ|"></span>
+                <span class="item-sale" th:text="|${item.price}đ|"></span>
+            </div>
+            <div th:if="${item.priceSale == null}">
+                <span style="color: #fcaf17;" th:text="|${item.price}đ|"></span>
+            </div>
+            <a th:href="|@{/addCart/}${item.id}|" class="btn btn-danger" style="width: 100%" >Thêm vào dỏ hàng</a>
+            <span class="sale" th:classappend="${item.percentSale} ? '' : 'd-none'" th:text="|${item.percentSale} %|"></span>
+        </div>
+    </div>
+</div>
+
+<div th:replace="user/fragmentsFooter.html"></div>

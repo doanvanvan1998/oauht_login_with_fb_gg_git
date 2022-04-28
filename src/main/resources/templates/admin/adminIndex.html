@@ -1,0 +1,91 @@
+<div th:replace="admin/fragmentsHeader.html"></div>
+<div class="container mt-5">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Thêm mới
+    </button>
+    <button type="button" class="btn btn-warning">
+        Thống kê
+    </button>
+    <table class="table">
+        <th>
+            <tr>
+                <td>Name</td>
+                <td>Image</td>
+                <td>Price</td>
+                <td>Price sale</td>
+                <td>% sale</td>
+                <td>Ngày tạo</td>
+                <td>Người tạo</td>
+                <td>Hành động</td>
+            </tr>
+        </th>
+        <tbody>
+        <tr th:each="item : ${Products}">
+            <td th:text="${item.name}"></td>
+            <td>
+                <img style="width: 100px; height: 100px" th:src="|@{/uploads/}${item.image}|">
+            </td>
+            <td th:text="${item.price}"></td>
+            <td th:text="${item.priceSale}"></td>
+            <td th:text="${item.percentSale}"></td>
+            <td th:text="${item.CreateDate}"></td>
+            <td th:text="${item.CreateBy}"></td>
+            <td>
+                <div class="d-flex">
+                    <form class="mr-2" method="get" th:action="|@{/admin/getProduct/}${item.getId()}|">
+                        <button class="btn btn-warning">Cập nhật</button>
+                    </form>
+                    <form method="get" th:action="|@{/admin/removeProduct/}${item.getId()}|">
+                        <button class="btn btn-danger">Xóa</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form method="post" class="modal-content" th:action="@{/admin/add-update-product}" th:object="${productDto}"  enctype="multipart/form-data">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Lưu mới sản phẩm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label >Tên sản phẩm:</label>
+                    <input type="text" th:field="*{name}" class="form-control" >
+                </div>
+                <div class="form-group">
+                    <label>Giá sản phẩm:</label>
+                    <input type="number" th:field="*{price}" class="form-control" >
+                </div>
+                <div class="form-group">
+                    <label >Giá sale:</label>
+                    <input type="number" th:field="*{priceSale}" class="form-control" >
+                </div>
+                <div class="form-group">
+                    <label >% sale:</label>
+                    <input type="number" th:field="*{percentSale}" class="form-control" >
+                </div>
+                <div class="custom-file col-md-2">
+                    <input type="file" name="file" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">Chọn file ...</label>
+                </div>
+                <div class="form-group">
+                    <label >Danh mục sản phẩm:</label>
+                    <select id="abc" th:field="*{categoryId}" name="pageSize" class="form-control">
+                        <option th:each="item : ${categories}" th:text="${item.getName()}" th:value="${item.getId()}">1</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div th:replace="admin/fragmentsFooter.html"></div>

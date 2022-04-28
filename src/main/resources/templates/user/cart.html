@@ -1,0 +1,27 @@
+<div th:replace="user/fragmentsHeader.html"></div>
+    <div class="container mt-5">
+        <h3>Dỏ hàng</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <td>Sản phẩm</td>
+                <td>Đơn giá</td>
+                <td>Số lượng</td>
+                <td>Thành tiền</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item :${lstCartDto}">
+                <td>
+                    <img style="width: 100px;height: 100px" th:src="|@{/uploads/}${item.image}|">
+                    <span th:text="${item.name}"></span>
+                </td>
+                <td th:text ="${item.price}"></td>
+                <td th:text ="${item.sl}"></td>
+                <td th:text ="${item.price * item.sl}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <a th:href="@{/pay}" class="btn btn-success">Thanh toán</a>
+    </div>
+<div th:replace="user/fragmentsFooter.html"></div>

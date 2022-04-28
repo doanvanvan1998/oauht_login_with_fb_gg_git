@@ -1,0 +1,14 @@
+<div th:replace="admin/fragmentsHeader.html"></div>
+<div class="container mt-5">
+    <h1>Cập nhật</h1>
+    <form method="post" th:action="@{/admin/add-update-category}" th:object="${categoryDto}" enctype="multipart/form-data">
+        <input class="d-none" type="text" th:value="${categoryDto.getId()}" name="id"></input>
+        <div class="form-group">
+            <label for="name">Tên danh mục:</label>
+            <input type="text" th:value="${categoryDto.getName()}" name="name" class="form-control" id="name">
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+    </form>
+</div>
+
+<div th:replace="admin/fragmentsFooter.html"></div>

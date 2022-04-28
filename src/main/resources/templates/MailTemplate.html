@@ -1,0 +1,37 @@
+
+<div class="container mt-5">
+    <h2 style="color: red">Thanh toán thành công!</h2>
+    <h4>Chi tiết đơn hàng đã mua</h4>
+    <table style="border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);">
+        <thead>
+        <tr style="background-color: #009879;
+    color: #ffffff;
+    text-align: left;">
+            <td>Sản phẩm</td>
+            <td>Đơn giá</td>
+            <td>Số lượng</td>
+            <td>Thành tiền</td>
+        </tr>
+        </thead>
+        <tbody style="border-bottom: 1px solid #dddddd;">
+        <tr style="border-bottom: 1px solid #dddddd;" th:each="item :${lstCartDto}">
+            <td style=" padding: 12px 15px;">
+<!--                <img style="width: 100px;height: 100px" th:src="'http://localhost:8088/uploads/'+ ${item.image}">-->
+                <span th:text="${item.name}"></span>
+            </td>
+            <td style=" padding: 12px 15px;" th:text ="${item.price}"></td>
+            <td style=" padding: 12px 15px;" th:text ="${item.sl}"></td>
+            <td  style=" padding: 12px 15px;" th:text ="${item.price * item.sl}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="http://localhost:8088/index">Bấm vào đây để tiếp tục mua sắm</a>
+</div>
+
+
